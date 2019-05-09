@@ -41,15 +41,19 @@ public class Curso {
 	public void matricula(Aluno aluno) {
 		this.alunos.add(aluno);
 	}
-	
+
 	public Set<Aluno> getAlunos() {
-	    return Collections.unmodifiableSet(alunos);
-	}	
+		return Collections.unmodifiableSet(alunos);
+	}
 
 	@Override
 	public String toString() {
 		return "[Curso: " + this.getNome() + ", tempo total: " + this.getTempoTotal() + ", aulas: + " + this.aulas
 				+ "]";
+	}
+
+	public boolean estaMatriculado(Aluno aluno) {
+		return this.alunos.contains(aluno);
 	}
 
 }
