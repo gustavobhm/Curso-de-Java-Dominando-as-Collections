@@ -1,8 +1,11 @@
 package br.com.alura;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -12,6 +15,7 @@ public class Curso {
 	private String instrutor;
 	private List<Aula> aulas = new LinkedList<Aula>();
 	private Set<Aluno> alunos = new TreeSet<>();
+	private Map<Integer, Aluno> matriculaParaAluno = new HashMap<>();
 
 	public Curso(String nome, String instrutor) {
 		this.nome = nome;
@@ -39,7 +43,10 @@ public class Curso {
 	}
 
 	public void matricula(Aluno aluno) {
+		// adiciona no Set de alunos
 		this.alunos.add(aluno);
+		// cria a relação no Map
+		this.matriculaParaAluno.put(aluno.getNumeroMatricula(), aluno);
 	}
 
 	public Set<Aluno> getAlunos() {
@@ -54,6 +61,13 @@ public class Curso {
 
 	public boolean estaMatriculado(Aluno aluno) {
 		return this.alunos.contains(aluno);
+	}
+
+	public Aluno buscaMatriculado(int numero) {
+		if (!matriculaParaAluno.containsKey(numero)) {
+			throw new NoSuchElementException();
+		}
+		return this.matriculaParaAluno.get(numero);
 	}
 
 }
